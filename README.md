@@ -5,7 +5,7 @@
 
 * Je, en tant qu'étudiant, regarde les informations sur l'écran pour me diriger plus rapidement vers une place vide et comme ça je réduis le temps que je passe en cherchant
 
-* Je , en tant qu'étudiant, regarde les informations sur l'écran pour me diriger vers une table qui peut avoir suffisamment de places libres pour moi et mes amis et comme ça nous augmentons le confort collectif.
+* Je, en tant qu'étudiant, regarde les informations sur l'écran pour me diriger vers une table qui peut avoir suffisamment de places libres pour moi et mes amis et comme ça nous augmentons le confort collectif.
 
 ### Personnel du restaurant:
 
