@@ -1,0 +1,31 @@
+RECOGNIZING TABLES :
+Preprocessing
+
+* color table model
+* learning data base (for SVM)
+----------------------------------------------
+Color segmentation
+
+* segmentation RGB -> shadow problems
+* segmentation HSV (dimension H-S) ->
+* SVM classifier (dimensions H-S) ->
+-----------------------------------------------
+Discrimination
+
+* size
+* form
+----------------------------------------------
+** TABLES ARE RECOGNIZED **
+---------------------------------------------
+
+
+RECOGNIZING PEOPLE AROUND TABLES :
+	background-foreground discrimination ?
+		composant connexes ?
+			size discrimination ?
+				centroides ?
+				clustering to find the distance to the closest table ?
+
+----------------------------------------------
+* PARTIE INTERFACE UTILISATEUR ET PROTOCOLE DE COMMUNICATION
+* PARTIE VISION PAR ORDINATEUR
