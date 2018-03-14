@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>jQuery Hello World</title>
+
+<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript">
+$("document").ready(function(){
+  $(".js-ajax-php-json").submit(function(){
+    var data = {
+      "action": "test"
+    };
+    data = $(this).serialize() + "&" + $.param(data);
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "process.php", //Relative or absolute path to response.php file
+      data: data,
+      success: function(data) {
+        $(".the-return").html(
+          "Favorite beverage: " + data["name"] + "<br />Favorite restaurant: " + data["favorite_restaurant"] + "<br />Gender: " + data["gender"] + "<br />JSON: " + data["json"]
+        );
+
+        alert("Form submitted successfully.\nReturned json: " + data["json"]);
+      }
+    });
+    return false;
+  });
+});
+</script>
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+</script>
+<div id="msgid">
+</div>
+<form action="" class="js-ajax-php-json" method="" accept-charset="utf-8">
+  <input type="submit" name="submit" value="Submit form"  />
+</form>
+<div class="the-return">
+	RESULT WILL be SHOWEN HERE
+</div>
+</body>
+</html>
