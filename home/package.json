@@ -1,0 +1,17 @@
+{
+  "name": "appli",
+  "version": "1.0.0",
+  "description": "probar",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nelson",
+  "license": "ISC",
+  "dependencies": {
+    "uniq": "^1.0.1"
+  }
+}
