@@ -20,48 +20,68 @@ vector<Table> tablesFactory(Mat ref, Mat current);
 int main()
 {
 
+    string filename = "vid.mp4";
+    VideoCapture capture(filename);
+    Mat frame;
+
+    if( !capture.isOpened() )
+        throw "Error when reading steam_avi";
+
+    namedWindow( "w", 1);
     reference_regions("empty_table.png");
     high_resolution_clock::time_point t1 = high_resolution_clock::now();
+    Mat src;
+    Mat trash;
+    for( ; ; )
+    {
 
-    //TESTING MANAGERS
-    /*
-    vector<Table> tables1 =  detailles_tables(reference, reference);
-    TableManager manager(tables1);
-    //manager.setReferenceTables(tables1);
-    manager.init();
-    //manager.init_references();
-    manager.update();
-    manager.update();
-    //manager.run();
-    string a = "test";
-    return -1;
-    */
+        //TESTING MANAGERS
+        /*
+        vector<Table> tables1 =  detailles_tables(reference, reference);
+        TableManager manager(tables1);
+        //manager.setReferenceTables(tables1);
+        manager.init();
+        //manager.init_references();
+        manager.update();
+        manager.update();
+        //manager.run();
+        string a = "test";
+        return -1;
+        */
+        //Mat src = imread("in_3.png");
+        capture >> src;
+        resize(src, src, Size(629, 248));
+        //SIZE ROWS = 248 COLS = 629
+        //cout<<"Source size: rows = "<<src.rows<< " Cols : "<<src.cols<<endl;
+        Rect rec(0, src.rows / 2, src.cols, src.rows / 2);
+        Mat roi = src(rec);
+        cvtColor(roi, roi, CV_BGR2GRAY);
+        mask_image(roi, reference);
+        threshold(roi, roi, THRESHOLD_VALUE, 255, THRESH_BINARY);
+        vector<Table> tables =  detailles_tables(reference, roi);
+        high_resolution_clock::time_point t2 = high_resolution_clock::now();
+        #ifdef DEBUG
+            TableManager manager(tables);
+            manager.init();
+            manager.update();
+        #endif
+        auto duration = duration_cast<microseconds>( t2 - t1 ).count();
+        for(Table table : tables)
+        {
+            cout<<table.occupied_places<<endl;
+        }
+        //cout << duration <<"  Microsecond";
+        cout<<"_______________"<<endl;
+        imshow("source", roi);
+        imshow("or", src);
+        imshow("reference", reference * 255);
+        //jump frames
+        for(auto i = 0 ; i< 40; i++){
+            capture>>trash;
+        }
+        waitKey(1000);
 
-    Mat src = imread("full_table.png");
-    resize(src, src, Size(629, 248));
-    //SIZE ROWS = 248 COLS = 629
-    //cout<<"Source size: rows = "<<src.rows<< " Cols : "<<src.cols<<endl;
-    Rect rec(0, src.rows / 2, src.cols, src.rows / 2);
-    Mat roi = src(rec);
-    cvtColor(roi, roi, CV_BGR2GRAY);
-    mask_image(roi, reference);
-    threshold(roi, roi, THRESHOLD_VALUE, 255, THRESH_BINARY);
-    vector<Table> tables =  detailles_tables(reference, roi);
-    high_resolution_clock::time_point t2 = high_resolution_clock::now();
-    TableManager manager(tables);
-    manager.init();
-    manager.update();
-    manager.update();
-    auto duration = duration_cast<microseconds>( t2 - t1 ).count();
-    for(Table table : tables){
-        cout<<table.occupied_places<<endl;
     }
-    cout << duration <<"  Microsecond";
-
-    //imshow("source", roi);
-    //imshow("or", src);
-    //imshow("reference", reference * 255);
-    waitKey(-1);
     return 0;
 }
 //GRAPHANA
@@ -74,13 +94,14 @@ vector<Table> detailles_tables(Mat src, Mat dest)
     for(auto &table: tables)
     {
         float pc = processTables(table.empty, table.full);
-        if(pc>= .22 && pc <= .33)
+        cout<<"PC : "<<pc<<endl;
+        if(pc>= .18 && pc <= .42)
             table.occupied_places = 1;
-        else if(pc >= .42 && pc <= .57)
+        else if(pc > .42 && pc <= .68)
             table.occupied_places = 2;
-        else if(pc >= .68 && pc <= .82)
+        else if(pc > .68 && pc <= .82)
             table.occupied_places = 3;
-        else if(pc >= .93)
+        else if(pc > .82)
             table.occupied_places = 4;
     }
     return tables;
