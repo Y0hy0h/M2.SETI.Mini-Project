@@ -15,6 +15,7 @@
 //#define DEBUG 0
 #define TABLE_SIZE 1200
 #define TOTAL_PLACES_PER_TABLE 4
+//#define WRITE_TO_DB 1
 
 struct Table
 {
