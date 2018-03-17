@@ -18,3 +18,5 @@
 * Je, en tant que gestionnaire, utilise les données d'utilisation pour faire des analyses statistiques et comme ça j'améliore l'aménagement de mon restaurant afin de augmenter le taux d'occupation.
 
 * Je, en tant que gestionnaire, profite de la bonne circulation pour optimiser la structure du restaurant et comme ça j'augmente la rentabilité des installations.
+
+https://photos.app.goo.gl/egb5IOyxpMD1Lq0k2
