@@ -111,7 +111,7 @@
         .then(tables => {
           this.realTables = tables
         })
-        .catch(console.error('init'))
+        .catch(console.error)
     }
 
     decrement () {
