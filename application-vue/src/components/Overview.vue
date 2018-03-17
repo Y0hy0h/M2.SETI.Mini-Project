@@ -69,7 +69,7 @@
 
     private live = false
 
-    private requestedPlaces = 1
+    private requestedPlaces = 3
     private minimumRequestedPlaces = 0
 
     get requestedPlacesFound (): boolean {
@@ -100,7 +100,10 @@
             }, 1000)
           }
         )
-        .catch(console.error)
+        .catch(error => {
+          console.error(error)
+          console.log('There was an error fetching the data, using fake data instead.')
+        })
 
     }
 
@@ -109,7 +112,7 @@
         .then(tables => {
           this.realTables = tables
         })
-        .catch()
+        .catch(console.error('init'))
     }
 
     decrement () {

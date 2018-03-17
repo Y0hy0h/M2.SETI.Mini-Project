@@ -1,12 +1,14 @@
 <template>
     <div class="table">
-        <v-stage :config="configKonva">
-            <v-layer>
-                <v-circle :config="configCircle"></v-circle>
-                <v-circle v-for="place in places" :key="place"
-                          :config="getPlaceConfig(place)"></v-circle>
-            </v-layer>
-        </v-stage>
+        <svg version="1.1"
+             baseProfile="full"
+             :width="size" :height="size"
+             xmlns="http://www.w3.org/2000/svg"
+             ref="canvas"
+        >
+            <circle v-bind="tableShape"></circle>
+            <circle v-for="placeShape in placeShapes" v-bind="placeShape"></circle>
+        </svg>
         <span class="places-left" v-show="!fake">{{tableData.free}}/{{tableData.capacity}}</span>
     </div>
 </template>
@@ -41,39 +43,26 @@
     private colorOccupied = Color('#bf4343')
     private colorSelected = Color('#919caa')
 
-    /*private tableShape = {
-      cx: this.$refs.canvas.width / 2,
-      cy: this.$refs.canvas.height / 2,
-      r: this.$refs.canvas.width * 0.5 / 2,
-    }*/
+    private size = 300
 
-    constructor () {
-      super()
-      this.randomForPlace = this.places.map(() => Math.random())
-    }
-
-    private configKonva = {
-      width: 300,
-      height: 300,
-    }
-
-    get configCircle () {
+    get tableShape () {
       let color = this.colorFree.mix(this.colorOccupied, this.tableData.occupied / this.tableData.capacity)
       if (0 < this.requestedPlaces && this.requestedPlaces <= this.tableData.free) {
         color = this.colorSelected
       }
-
       return {
-        x: this.configKonva.width / 2,
-        y: this.configKonva.height / 2,
-        radius: this.configKonva.width / 2 * 0.5,
-        fill: color.rgb().string()
+        cx: this.size / 2,
+        cy: this.size / 2,
+        r: this.size * 0.5 / 2,
+        fill: color,
       }
     }
 
-    getPlaceConfig (place: number): object {
-      const radius = this.configKonva.width / 2 * 0.15
+    get placeShapes (): object[] {
+      return [...Array(this.tableData.capacity).keys()].map(this.getPlaceShape)
+    }
 
+    getPlaceShape (place: number) {
       let color = this.colorFree
       const isSelected = this.requestedPlaces <= this.tableData.free
         && place < this.tableData.occupied + this.requestedPlaces
@@ -85,15 +74,23 @@
         color = this.colorOccupied
       }
 
-      const config = {
-        x: this.configKonva.width / 2,
-        y: this.configKonva.height / 2,
-        radius: radius,
-        fill: color.rgb().string(),
-        offsetY: this.configCircle.radius + radius + 10,
-        rotation: (place / this.tableData.capacity) * 360 + 45 + Math.floor(this.randomForPlace[place] * 15)
+      const radius = this.size * 0.15 / 2
+      const yTranslation = this.tableShape.r + radius + 10
+      const rotation = (place / this.tableData.capacity) * 360 - 135
+        + Math.floor(this.randomForPlace[place] * 15)
+
+      return {
+        cx: 0,
+        cy: yTranslation,
+        r: radius,
+        fill: color,
+        transform: `translate(${this.size / 2}, ${this.size / 2}) rotate(${rotation})`
       }
-      return config
+    }
+
+    constructor () {
+      super()
+      this.randomForPlace = this.places.map(() => Math.random())
     }
   };
 </script>
