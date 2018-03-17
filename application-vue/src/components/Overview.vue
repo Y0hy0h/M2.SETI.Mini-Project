@@ -19,7 +19,17 @@
   })
   export default class Overview extends Vue {
     private repository = new Repository()
-    private tables: Table[] = []
+    private baseTables = [
+      new Table(100, 4, 3),
+      new Table(101, 4, 1),
+      new Table(102, 4, 0),
+      new Table(103, 4, 1),
+      new Table(104, 4, 0),
+      new Table(105, 4, 0),
+      new Table(106, 4, 0),
+      new Table(107, 4, 4),
+    ]
+    private tables: Table[] = this.baseTables
     private live = true
 
     mounted () {
@@ -32,8 +42,12 @@
 
     init () {
       this.repository.getTables()
-        .then(tables => this.tables = tables)
-        .catch(console.error)
+        .then(tables => {
+          for (let i = 0; i < tables.length; i++) {
+            this.tables[i] = tables[i]
+          }
+        })
+        .catch()
     }
   }
 </script>
@@ -42,6 +56,7 @@
 <style scoped lang="stylus">
     .overview
         display: flex
+        flex-wrap wrap
 
     .background-image
         position: fixed

@@ -6,11 +6,13 @@
                 <v-circle v-for="place in places" :config="getPlaceConfig(place)"></v-circle>
             </v-layer>
         </v-stage>
-        <span class="left">{{tableData.occupied}}/{{tableData.capacity}}</span>
+        <span class="left">{{tableData.free}}/{{tableData.capacity}}</span>
     </div>
 </template>
 
 <script lang="ts">
+  import Color from 'color'
+
   import { Component, Prop, Vue } from 'vue-property-decorator'
   import { Table } from '@/model/table'
 
@@ -25,29 +27,37 @@
         places[i] = i
       }
       return places
+
     }
+
+    private colorFree = Color('#e9eeba')
+    private colorOccupied = Color('#ff5555aa')
 
     private configKonva = {
       width: 300,
       height: 300,
     }
 
-    private configCircle = {
-      x: this.configKonva.width / 2,
-      y: this.configKonva.height / 2,
-      radius: this.configKonva.width / 2 * 0.5,
-      fill: '#e9eeba',
+    get configCircle () {
+      const color = this.colorFree.mix(this.colorOccupied, this.tableData.occupied / this.tableData.capacity)
+      return {
+        x: this.configKonva.width / 2,
+        y: this.configKonva.height / 2,
+        radius: this.configKonva.width / 2 * 0.5,
+        fill: color.string()
+      }
     }
 
     getPlaceConfig (place: number): object {
       const occupied = place < this.tableData.occupied
       const radius = this.configKonva.width / 2 * 0.15
+      const color = occupied ? this.colorOccupied : this.colorFree
       const config = {
         x: this.configKonva.width / 2,
         y: this.configKonva.height / 2,
         radius: radius,
-        fill: occupied ? '#e9eeba' : '#ff5555aa',
-        offsetY: -this.configCircle.radius - radius - 10,
+        fill: color.string(),
+        offsetY: this.configCircle.radius + radius + 10,
         rotation: (place / this.tableData.capacity) * 360,
       }
       return config
