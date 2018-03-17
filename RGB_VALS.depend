@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1521153220 source:/home/younes/cpp_programming/opencv_projects/RGB_VALS/main.cpp
+1521282714 source:/home/younes/cpp_programming/opencv_projects/RGB_VALS/main.cpp
 	"definitions.hpp"
 
 1513971981 /usr/local/include/opencv2/imgproc.hpp
@@ -788,7 +788,7 @@
 1513971981 /usr/local/include/opencv2/imgproc/imgproc.hpp
 	"opencv2/imgproc.hpp"
 
-1521208334 /home/younes/cpp_programming/opencv_projects/RGB_VALS/definitions.hpp
+1521282411 /home/younes/cpp_programming/opencv_projects/RGB_VALS/definitions.hpp
 	"opencv2/imgproc.hpp"
 	"opencv2/highgui.hpp"
 	<iostream>
@@ -801,7 +801,7 @@
 	<cppconn/resultset.h>
 	<cppconn/statement.h>
 
-1520950416 source:/home/younes/cpp_programming/opencv_projects/RGB_VALS/Manager.cpp
+1521282631 source:/home/younes/cpp_programming/opencv_projects/RGB_VALS/Manager.cpp
 	"definitions.hpp"
 	<iostream>
 
