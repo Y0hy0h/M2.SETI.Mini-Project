@@ -32,6 +32,7 @@ int main()
     high_resolution_clock::time_point t1 = high_resolution_clock::now();
     Mat src;
     Mat trash;
+    char c = 1;
     for( ; ; )
     {
 
@@ -49,6 +50,7 @@ int main()
         return -1;
         */
         //Mat src = imread("in_3.png");
+
         capture >> src;
         resize(src, src, Size(629, 248));
         //SIZE ROWS = 248 COLS = 629
@@ -60,10 +62,10 @@ int main()
         threshold(roi, roi, THRESHOLD_VALUE, 255, THRESH_BINARY);
         vector<Table> tables =  detailles_tables(reference, roi);
         high_resolution_clock::time_point t2 = high_resolution_clock::now();
-        #ifdef DEBUG
-            TableManager manager(tables);
-            manager.init();
-            manager.update();
+        #ifdef WRITE_TO_DB
+        TableManager manager(tables);
+        manager.init();
+        manager.update();
         #endif
         auto duration = duration_cast<microseconds>( t2 - t1 ).count();
         for(Table table : tables)
@@ -76,9 +78,11 @@ int main()
         imshow("or", src);
         imshow("reference", reference * 255);
         //jump frames
-        for(auto i = 0 ; i< 40; i++){
+        for(auto i = 0 ; i< 20; i++){
             capture>>trash;
         }
+        if(c == 1)
+            c = waitKey(-1);
         waitKey(1000);
 
     }

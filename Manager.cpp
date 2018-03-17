@@ -2,9 +2,9 @@
 #include <iostream>
 
 
-#define DB_HOST_ADDR    "tcp://localhost"
-#define DB_USER         "root"
-#define DB_PASSWORD     "younes"
+#define DB_HOST_ADDR    "tcp://192.168.0.58"
+#define DB_USER         "application"
+#define DB_PASSWORD     "password24"
 using namespace std;
 void TableManager::init()
 {
