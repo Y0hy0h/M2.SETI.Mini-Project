@@ -76,6 +76,8 @@
 
 <style scoped lang="stylus">
     .header
+        display: flex
+        align-items: baseline
         font-size: 22px
         color: #E9EEBA
         padding-top: 12px
@@ -83,15 +85,15 @@
         padding-left: 48px
         margin-bottom: 12px
         background-color: rgba(0, 0, 0, 0.8)
+        align-content: center
 
     .title
         font-size: 2em
-        display: inline
         font-style: italic
+        margin: 0
 
     .subtitle
-        margin-left: 1.5em
-        filter: brightness(75%)
+        margin-left: 1em
         opacity: .8
         font-size: 1em
         font-weight: lighter
@@ -111,15 +113,6 @@
         top: -10px
         left: -10px
         z-index: -1
-
-    .loading
-        font-size: 2em
-        font-weight: bolder
-        color: #E9EEBA
-        position: absolute
-        top: 50%
-        left: 50%
-        transform: translate(-50%, -50%);
 
     .tables
         display: flex
