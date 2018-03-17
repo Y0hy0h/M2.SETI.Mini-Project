@@ -13,10 +13,10 @@ export class Repository {
     const tables = json.map(rawTable => {
       return new Table(
         rawTable.id,
-        rawTable.capacity,
-        rawTable.occupied_places
+        parseInt(rawTable.capacity),
+        parseInt(rawTable.occupied_places),
       )
     })
-    return tables;
+    return tables
   }
 }

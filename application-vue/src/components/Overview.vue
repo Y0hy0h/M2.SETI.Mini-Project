@@ -1,6 +1,8 @@
 <template>
-    <div>
-        <TableView v-for="table in tables" :key="table.id" :table-data="table"></TableView>
+    <div class="overview">
+        <img class="background-image" src="../assets/background.jpg"/>
+        <span v-if="tables.length === 0" class="loading">Chargement...</span>
+        <TableView v-else v-for="table in tables" :key="table.id" :table-data="table"></TableView>
     </div>
 </template>
 
@@ -18,9 +20,14 @@
   export default class Overview extends Vue {
     private repository = new Repository()
     private tables: Table[] = []
+    private live = true
 
     mounted () {
-      setInterval(() => {this.init()}, 1000)
+      setInterval(() => {
+        if (this.live) {
+          this.init()
+        }
+      }, 1000)
     }
 
     init () {
@@ -33,4 +40,26 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
+    .overview
+        display: flex
+
+    .background-image
+        position: fixed
+        filter: blur(7px) brightness(50%);
+        min-height: 110%
+        min-width: 110%
+        width: 110%
+        height: auto
+        top: -10px
+        left: -10px
+        z-index: -1
+
+    .loading
+        font-size: 2em
+        font-weight: bolder
+        color: #E9EEBA
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%);
 </style>
