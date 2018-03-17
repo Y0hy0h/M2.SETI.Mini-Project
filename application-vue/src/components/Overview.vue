@@ -20,12 +20,13 @@
     private tables: Table[] = []
 
     mounted () {
-      this.init()
-        .catch(console.error)
+      setInterval(() => {this.init()}, 1000)
     }
 
-    async init () {
-      this.tables = await this.repository.getTables()
+    init () {
+      this.repository.getTables()
+        .then(tables => this.tables = tables)
+        .catch(console.error)
     }
   }
 </script>

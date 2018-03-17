@@ -4439,6 +4439,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
+konva@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-2.0.2.tgz#e9b22f18c5fe3fb0012cd6ef234bf602818a60e1"
+
 last-call-webpack-plugin@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/last-call-webpack-plugin/-/last-call-webpack-plugin-2.1.2.tgz#ad80c6e310998294d2ed2180a68e9589e4768c44"
@@ -7342,6 +7346,12 @@ vue-jest@^2.1.1:
     tsconfig "^7.0.0"
     vue-template-es2015-compiler "^1.5.3"
 
+vue-konva@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/vue-konva/-/vue-konva-1.0.4.tgz#484d7d330325480735a956a299d157c914509cee"
+  dependencies:
+    vue "^2.5.2"
+
 vue-loader@^14.1.1:
   version "14.2.1"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-14.2.1.tgz#3ace19f98187b1fa9e0709defa963a0a2396b6b3"
@@ -7391,7 +7401,7 @@ vue-template-es2015-compiler@^1.5.3, vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.5.13:
+vue@^2.5.13, vue@^2.5.2:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
 
