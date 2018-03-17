@@ -7,7 +7,7 @@
                           :config="getPlaceConfig(place)"></v-circle>
             </v-layer>
         </v-stage>
-        <span class="left">{{tableData.free}}/{{tableData.capacity}}</span>
+        <span class="places-left" v-show="!fake">{{tableData.free}}/{{tableData.capacity}}</span>
     </div>
 </template>
 
@@ -20,6 +20,11 @@
   @Component
   export default class TableView extends Vue {
     @Prop() private tableData!: Table
+    @Prop() private requestedPlaces!: number
+
+    get fake (): boolean {
+      return this.tableData.id < 0
+    }
 
     get places (): number[] {
       const amount = this.tableData.capacity
@@ -34,19 +39,30 @@
 
     private colorFree = Color('#e9eeba')
     private colorOccupied = Color('#bf4343')
+    private colorSelected = Color('#919caa')
 
-    private configKonva = {
-      width: 300,
-      height: 300,
-    }
+    /*private tableShape = {
+      cx: this.$refs.canvas.width / 2,
+      cy: this.$refs.canvas.height / 2,
+      r: this.$refs.canvas.width * 0.5 / 2,
+    }*/
 
     constructor () {
       super()
       this.randomForPlace = this.places.map(() => Math.random())
     }
 
+    private configKonva = {
+      width: 300,
+      height: 300,
+    }
+
     get configCircle () {
-      const color = this.colorFree.mix(this.colorOccupied, this.tableData.occupied / this.tableData.capacity)
+      let color = this.colorFree.mix(this.colorOccupied, this.tableData.occupied / this.tableData.capacity)
+      if (0 < this.requestedPlaces && this.requestedPlaces <= this.tableData.free) {
+        color = this.colorSelected
+      }
+
       return {
         x: this.configKonva.width / 2,
         y: this.configKonva.height / 2,
@@ -56,9 +72,19 @@
     }
 
     getPlaceConfig (place: number): object {
-      const occupied = place < this.tableData.occupied
       const radius = this.configKonva.width / 2 * 0.15
-      const color = occupied ? this.colorOccupied : this.colorFree
+
+      let color = this.colorFree
+      const isSelected = this.requestedPlaces <= this.tableData.free
+        && place < this.tableData.occupied + this.requestedPlaces
+      if (isSelected) {
+        color = this.colorSelected
+      }
+      const occupied = place < this.tableData.occupied
+      if (occupied) {
+        color = this.colorOccupied
+      }
+
       const config = {
         x: this.configKonva.width / 2,
         y: this.configKonva.height / 2,
@@ -78,7 +104,7 @@
         position: relative
         width: fit-content
 
-    .left
+    .places-left
         position: absolute
         font-size: 2em
         top: 50%
