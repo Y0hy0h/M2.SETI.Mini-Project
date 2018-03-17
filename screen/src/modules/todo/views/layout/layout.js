@@ -10,6 +10,8 @@ var tpl = require('./layout.hbs');
 
 module.exports = Marionette.Layout.extend({
     template: tpl,
+    className: '',
+    id: 'main-region',
 
     ui: {
         app: '#todoapp'
@@ -32,9 +34,9 @@ module.exports = Marionette.Layout.extend({
     onShow: function() {
         var options = {collection: this.options.todosCollection};
 
-        this.header.show(new HeaderView(options));
+        // this.header.show(new HeaderView(options));
         this.main.show(new TodosView(options));
-        this.footer.show(new FooterView(options));
+        // this.footer.show(new FooterView(options));
     }
 
 });
