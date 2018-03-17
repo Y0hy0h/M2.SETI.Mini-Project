@@ -2,7 +2,7 @@
     <div class="overview">
         <div class="header">
             <h1 class="title">FastResto</h1>
-            <span class="subtitle">Trouver. Manger. Continuer.</span>
+            <span class="subtitle">Trouver—Manger—Continuer</span>
         </div>
         <img class="background-image" src="../assets/background.jpg"/>
         <div class="tables">
