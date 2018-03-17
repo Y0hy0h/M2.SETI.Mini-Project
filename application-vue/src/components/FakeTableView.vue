@@ -7,7 +7,6 @@
                           :config="getPlaceConfig(place)"></v-circle>
             </v-layer>
         </v-stage>
-        <span class="left">{{tableData.free}}/{{tableData.capacity}}</span>
     </div>
 </template>
 
@@ -28,6 +27,7 @@
         places[i] = i
       }
       return places
+
     }
 
     private randomForPlace: number[]
@@ -35,14 +35,14 @@
     private colorFree = Color('#e9eeba')
     private colorOccupied = Color('#bf4343')
 
-    private configKonva = {
-      width: 300,
-      height: 300,
-    }
-
     constructor () {
       super()
       this.randomForPlace = this.places.map(() => Math.random())
+    }
+
+    private configKonva = {
+      width: 300,
+      height: 300,
     }
 
     get configCircle () {

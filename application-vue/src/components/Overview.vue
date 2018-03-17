@@ -5,9 +5,12 @@
             <span class="subtitle">Trouver. Manger. Continuer.</span>
         </div>
         <img class="background-image" src="../assets/background.jpg"/>
-        <span v-if="tables.length === 0" class="loading">Chargement...</span>
-        <div v-else class="tables">
+        <div class="tables">
+            <FakeTableView v-for="table in fakeTables.slice(0, 1)" :key="table.id"
+                           :table-data="table"></FakeTableView>
             <TableView v-for="table in tables" :key="table.id" :table-data="table"></TableView>
+            <FakeTableView v-for="table in fakeTables.slice(1)" :key="table.id"
+                           :table-data="table"></FakeTableView>
         </div>
     </div>
 </template>
@@ -15,43 +18,56 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import TableView from '@/components/TableView.vue'
+  import FakeTableView from '@/components/FakeTableView.vue'
   import { Repository } from '@/model/repository'
   import { Table } from '@/model/table'
 
   @Component({
     components: {
       TableView,
+      FakeTableView,
     }
   })
   export default class Overview extends Vue {
     private repository = new Repository()
-    private baseTables = [
+    private fakeTables = [
       new Table(100, 4, 3),
-      new Table(101, 4, 1),
-      new Table(102, 4, 0),
-      new Table(103, 4, 1),
-      new Table(104, 4, 0),
-      new Table(105, 4, 0),
-      new Table(106, 4, 0),
+      new Table(101, 4, 4),
+      new Table(102, 4, 2),
+      new Table(103, 4, 4),
+      new Table(104, 4, 3),
+      new Table(105, 4, 1),
+      new Table(106, 4, 2),
       new Table(107, 4, 4),
     ]
-    private tables: Table[] = this.baseTables
-    private live = true
+    private tables: Table[] = [
+      new Table(1, 4, 0),
+      new Table(2, 4, 1)
+    ]
+    private live = false
 
     mounted () {
-      setInterval(() => {
-        if (this.live) {
-          this.init()
-        }
-      }, 1000)
+      // If can connect, set live
+      this.repository.getTables()
+        .then(
+          tables => {
+            this.tables = tables
+            this.live = true
+            setInterval(() => {
+              if (this.live) {
+                this.init()
+              }
+            }, 1000)
+          }
+        )
+        .catch(console.error)
+
     }
 
     init () {
       this.repository.getTables()
         .then(tables => {
-          for (let i = 0; i < tables.length; i++) {
-            this.tables[i] = tables[i]
-          }
+          this.tables = tables
         })
         .catch()
     }
