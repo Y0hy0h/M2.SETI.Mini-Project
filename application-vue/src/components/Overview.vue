@@ -2,7 +2,6 @@
     <div class="overview">
         <div class="header">
             <h1 class="title">FastResto</h1>
-            <span class="subtitle">Trouver—Manger—Continuer</span>
         </div>
         <img class="background-image" src="../assets/background.jpg"/>
         <div class="tables">
@@ -195,12 +194,6 @@
         font-size: 2em
         font-style: italic
         margin: 0
-
-    .subtitle
-        margin-left: 1em
-        opacity: .8
-        font-size: 1em
-        font-weight: lighter
 
     .overview
         display: flex
