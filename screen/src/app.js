@@ -3,12 +3,9 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 Backbone.$ = $;
 var Marionette = require('backbone.marionette');
-
-
+var BackboneRaphael = require('./vendors/backbone.raphael.js')
 // Local
 var TodoModule = require('./modules/todo/module');
-
-
 
 // app bootstrap
 var app = new Marionette.Application();

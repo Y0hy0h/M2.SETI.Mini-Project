@@ -31,6 +31,7 @@ class TodoModule extends Marionette.Module
     _createContainer: ->
         node = document.createElement 'div'
         node.id = this.todoRegionId
+        node.class = 'content'
         document.body.appendChild node
 
     _addRegion: ->
