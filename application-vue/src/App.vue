@@ -17,10 +17,14 @@
 </script>
 
 <style lang="stylus">
+    @import url('https://fonts.googleapis.com/css?family=Kanit:200,400,400i,700i&subset=latin-ext');
+
+    body
+        margin: 0
+
     #app
-        font-family 'Avenir', Helvetica, Arial, sans-serif
-        -webkit-font-smoothing antialiased
-        -moz-osx-font-smoothing grayscale
-        text-align center
-        color #2c3e50
+        font-family: 'Kanit', Helvetica, Arial, sans-serif
+        -webkit-font-smoothing: antialiased
+        -moz-osx-font-smoothing: grayscale
+        color: #2c3e50
 </style>

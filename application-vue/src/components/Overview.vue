@@ -1,8 +1,14 @@
 <template>
     <div class="overview">
+        <div class="header">
+            <h1 class="title">FastResto</h1>
+            <span class="subtitle">Trouver. Manger. Continuer.</span>
+        </div>
         <img class="background-image" src="../assets/background.jpg"/>
         <span v-if="tables.length === 0" class="loading">Chargement...</span>
-        <TableView v-else v-for="table in tables" :key="table.id" :table-data="table"></TableView>
+        <div v-else class="tables">
+            <TableView v-for="table in tables" :key="table.id" :table-data="table"></TableView>
+        </div>
     </div>
 </template>
 
@@ -52,11 +58,32 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
+    .header
+        font-size: 22px
+        color: #E9EEBA
+        padding-top: 12px
+        padding-bottom: 12px
+        padding-left: 48px
+        margin-bottom: 12px
+        background-color: rgba(0, 0, 0, 0.8)
+
+    .title
+        font-size: 2em
+        display: inline
+        font-style: italic
+
+    .subtitle
+        margin-left: 1.5em
+        filter: brightness(75%)
+        opacity: .8
+        font-size: 1em
+        font-weight: lighter
+
     .overview
         display: flex
-        flex-wrap wrap
+        flex-wrap: wrap
+        flex-direction: column
 
     .background-image
         position: fixed
@@ -77,4 +104,8 @@
         top: 50%
         left: 50%
         transform: translate(-50%, -50%);
+
+    .tables
+        display: flex
+        flex-wrap: wrap
 </style>

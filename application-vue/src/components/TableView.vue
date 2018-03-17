@@ -3,7 +3,8 @@
         <v-stage :config="configKonva">
             <v-layer>
                 <v-circle :config="configCircle"></v-circle>
-                <v-circle v-for="place in places" :config="getPlaceConfig(place)"></v-circle>
+                <v-circle v-for="place in places" :key="place"
+                          :config="getPlaceConfig(place)"></v-circle>
             </v-layer>
         </v-stage>
         <span class="left">{{tableData.free}}/{{tableData.capacity}}</span>
@@ -44,7 +45,7 @@
         x: this.configKonva.width / 2,
         y: this.configKonva.height / 2,
         radius: this.configKonva.width / 2 * 0.5,
-        fill: color.string()
+        fill: color.rgb().string()
       }
     }
 
@@ -56,7 +57,7 @@
         x: this.configKonva.width / 2,
         y: this.configKonva.height / 2,
         radius: radius,
-        fill: color.string(),
+        fill: color.rgb().string(),
         offsetY: this.configCircle.radius + radius + 10,
         rotation: (place / this.tableData.capacity) * 360,
       }
