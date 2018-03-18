@@ -43,30 +43,18 @@
     }
   })
   export default class Overview extends Vue {
-    private repository = new Repository()
-    private fakeTables = [
-      new Table(-100, 4, 3),
-      new Table(-101, 4, 4),
-      new Table(-102, 4, 2),
-      new Table(-103, 4, 4),
-      new Table(-104, 4, 3),
-      new Table(-105, 4, 1),
-      new Table(-106, 4, 2),
-      new Table(-107, 4, 4),
-    ]
-    private realTables: Table[] = [
+    private tables = [
+      new Table(100, 4, 3),
+      new Table(101, 4, 4),
+      new Table(102, 4, 2),
+      new Table(103, 4, 4),
+      new Table(104, 4, 3),
+      new Table(105, 4, 1),
+      new Table(106, 4, 2),
+      new Table(107, 4, 4),
       new Table(1, 4, 0),
       new Table(2, 4, 1)
     ]
-
-    get tables (): Table[] {
-      const tables = cloneDeep(this.fakeTables)
-      tables.splice(2, 0, ...this.realTables)
-      return tables
-
-    }
-
-    private live = false
 
     private requestedPlaces = 3
     private minimumRequestedPlaces = 0
@@ -83,35 +71,6 @@
     get maxCapacity (): number {
       const capacities = this.tables.map(table => table.capacity)
       return Math.max(...capacities)
-    }
-
-    mounted () {
-      // If can connect, set live
-      this.repository.getTables()
-        .then(
-          tables => {
-            this.realTables = tables
-            this.live = true
-            setInterval(() => {
-              if (this.live) {
-                this.init()
-              }
-            }, 1000)
-          }
-        )
-        .catch(error => {
-          console.error(error)
-          console.log('There was an error fetching the data, using fake data instead.')
-        })
-
-    }
-
-    init () {
-      this.repository.getTables()
-        .then(tables => {
-          this.realTables = tables
-        })
-        .catch(console.error)
     }
 
     decrement () {

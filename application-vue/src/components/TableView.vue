@@ -92,6 +92,11 @@
     constructor () {
       super()
       this.randomForPlace = this.places.map(() => Math.random())
+      setInterval(() => {
+        if (Math.random() < .1) {
+          this.tableData.occupied = Math.round(Math.random() * this.tableData.capacity)
+        }
+      }, 1000)
     }
   };
 </script>
