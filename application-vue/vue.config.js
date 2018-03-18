@@ -5,6 +5,9 @@ module.exports = {
         'vue$': 'vue/dist/vue.js'
       }
     },
+    output: {
+      publicPath: ''
+    }
   },
   lintOnSave: false
 }
