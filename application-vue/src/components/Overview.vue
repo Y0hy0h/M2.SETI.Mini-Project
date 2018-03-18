@@ -132,13 +132,12 @@
 
 <style scoped lang="stylus">
 
-    $base-color = #E9EEBA
+    $base-color = #efdc05
 
     .banner
         display: flex
         align-items: baseline
         font-size: 22px
-        color: $base-color
         padding-top: 12px
         padding-bottom: 12px
         background-color: rgba(0, 0, 0, 0.8)
@@ -146,11 +145,13 @@
 
     .header
         @extends .banner
+        color: $base-color
         padding-left: 48px
         margin-bottom: 12px
 
     .input
         @extends .banner
+        color: #cccccc
         justify-content: center
         position: fixed
         width: 100%
@@ -165,10 +166,11 @@
             text-align: left
 
         .amount
+            color: $base-color
             font-family: monospace
 
             &.invalid
-                color: red
+                color: #e53a40
 
         button
             background: None

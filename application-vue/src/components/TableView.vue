@@ -3,6 +3,7 @@
         <svg version="1.1"
              baseProfile="full"
              :width="size" :height="size"
+             viewbox="0 0 200 200"
              xmlns="http://www.w3.org/2000/svg"
              ref="canvas"
         >
@@ -39,11 +40,11 @@
 
     private randomForPlace: number[]
 
-    private colorFree = Color('#e9eeba')
-    private colorOccupied = Color('#bf4343')
-    private colorSelected = Color('#919caa')
+    private colorFree = Color('#eeeeee')
+    private colorOccupied = Color('#777777')
+    private colorSelected = Color('#efdc05')
 
-    private size = 300
+    private size = 275
 
     get tableShape () {
       let color = this.colorFree.mix(this.colorOccupied, this.tableData.occupied / this.tableData.capacity)
